@@ -6,7 +6,7 @@ We think the keypoint is that client must pay for the metadata, the metadata is 
 
 
 
-![](/picture/storage-helper-workflow.pdf)
+![](/picture/storage-helper-workflow.jpg)
 
 - Step1
   - Input: User data
