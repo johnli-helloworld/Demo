@@ -66,7 +66,7 @@ type TipSetKey struct {
 ```
 
 - Handler结构体,当有Node连接到自己时(1)会发送包含本节点信息的hello 消息给对方; (2) 对端会回复一个包含对端节点信息的消息体过来
-  - host对应libp2p主机上的主机
+  - host对应libp2p上的主机
   - 创世区块cid
   - 区块同步回调函数
   - 检索当前最重的tipset
