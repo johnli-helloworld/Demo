@@ -105,12 +105,12 @@ func (h *Handler) handleNewStream(s net.Stream) {
 }
 // sendHello send a hello message on stream `s`.
 func (h *Handler) sendHello(s net.Stream) error {
-    //获取本节点的hello消息体
+	//获取本节点的hello消息体
 	msg, err := h.getOurHelloMessage()
 	if err != nil {
 		return err
 	}
-    //向远端节点发送hello消息体
+	//向远端节点发送hello消息体
 	return cbu.NewMsgWriter(s).WriteMsg(&msg)
 }
 
@@ -193,13 +193,13 @@ func (hn *helloNotify) Connected(n net.Network, c net.Conn) {
 		//根据获取的hello消息,构造关于对等节点链的元数据信息
 		ci, err := hn.hello().processHelloMessage(from, hello)
 		switch {
-        //如果校验失败则终止连接
+		//如果校验失败则终止连接
 		case err == ErrBadGenesis:
 			log.Debugf("genesis cid: %s does not match: %s, disconnecting from peer: %s", &hello.GenesisHash, hn.hello().genesis, from)
 			genesisErrCt.Inc(context.TODO(), 1)
 			_ = c.Close()
 			return
-        //成功则将消息传递给它的处理程序回调函数(helloCallback)
+		//成功则将消息传递给它的处理程序回调函数(helloCallback)
 		case err == nil:
 			hn.hello().callBack(ci)
 		default:
@@ -252,10 +252,10 @@ func New(h host.Host, gen cid.Cid, helloCallback helloCallback, getHeaviestTipSe
 		getHeaviestTipSet: getHeaviestTipSet,
 		networkName:       net,
 	}
-    //设置流处理回调函数
+	//设置流处理回调函数
 	h.SetStreamHandler(helloProtocol(net), hello.handleNewStream)
    
-    // register for connection notifications(注册网络状态改变通知回调函数)
+	// register for connection notifications(注册网络状态改变通知回调函数)
 	h.Network().Notify((*helloNotify)(hello))
 
 	return hello
@@ -293,12 +293,12 @@ type HelloProtocolSubmodule struct {
 // Start boots up the node.
 func (node *Node) Start(ctx context.Context) error {
     ...
-    // 定义区块同步的回调函数
+		// 定义区块同步的回调函数
 		helloCallback := func(ci *types.ChainInfo) {
 			node.Network.PeerTracker.Track(ci)
 			// TODO Implement principled trusting of ChainInfo's
 			trusted := true
-            // 触发调用会启动区块同步的动作
+			// 触发调用会启动区块同步的动作
 			err := node.Chain.Syncer.HandleNewTipSet(context.Background(), ci, trusted)
 			if err != nil {
 				log.Infof("error handling tipset from hello %s: %s", ci, err)
@@ -306,7 +306,7 @@ func (node *Node) Start(ctx context.Context) error {
 			}
 			node.Chain.ChainSynced.Done()
 		}
-    //实例化hello服务
+		//实例化hello服务
 		node.HelloProtocol.HelloSvc = hello.New(node.Host(), node.Chain.ChainReader.GenesisCid(), helloCallback, node.PorcelainAPI.ChainHead, node.Network.NetworkName)
 }
 ```
