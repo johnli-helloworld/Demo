@@ -1,8 +1,5 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+## 目录
 
-- [目录](#%E7%9B%AE%E5%BD%95)
 - [1. 协议概览图](#1-%E5%8D%8F%E8%AE%AE%E6%A6%82%E8%A7%88%E5%9B%BE)
 - [2. 源码信息](#2-%E6%BA%90%E7%A0%81%E4%BF%A1%E6%81%AF)
 - [3. 源码分析](#3-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90)
@@ -25,36 +22,6 @@
       - [3.2.4.2 函数](#3242-%E5%87%BD%E6%95%B0)
       - [3.2.4.3 方法](#3243-%E6%96%B9%E6%B3%95)
         - [attachDealToSector()](#attachdealtosector)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-## 目录
-
-- 1. [协议概览图](#1. 协议概览图)
-
-- 2. [源码信息](#2. 源码信息)
-
-- 3. [源码分析](#源码分析)
-
-  - 3.1 [存储客户](#3.1 存储客户)
-    - 3.1.1 [数据结构](#3.1.1 数据结构)
-    - 3.1.2 [函数](#3.1.2 函数)
-    - 3.1.3 [client方法](#3.1.3 方法)
-      - [ProposeDeal()：下单](ProposeDeal()：下单)
-      - [QueryDeal()：查询订单状态](#QueryDeal()：查询订单状态)
-  - 3.2 [存储矿工](#存储矿工)
-    - 3.2.1 [数据结构](#3.2.1 数据结构)
-    - 3.2.2 [函数](#3.2.1 函数)
-    - 3.2.3 [miner方法](#3.2.1 方法)
-      - [handleMakeDeal()：侦听交易请求](#handleMakeDeal())
-      - [handleQueryDeal()：侦听交易查询请求](#handleQueryDeal())
-      - [OnCommitmentSent()：](#OnCommitmentSent())
-      - [OnNewHeaviestTipSet()：](#OnNewHeaviestTipSet())
-    - 3.2.4 [dealsAwaitingSeal](#dealsAwaitingSeal)
-      - [数据结构](#数据结构)
-      - [函数](#函数)
-      - [dealsAwaitingSeal方法](#)
-        - [attachDealToSector():](#attachDealToSector())
 
 ## 1. 协议概览图
 
