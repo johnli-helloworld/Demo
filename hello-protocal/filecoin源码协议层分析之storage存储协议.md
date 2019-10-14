@@ -1,12 +1,42 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [目录](#%E7%9B%AE%E5%BD%95)
+- [1. 协议概览图](#1-%E5%8D%8F%E8%AE%AE%E6%A6%82%E8%A7%88%E5%9B%BE)
+- [2. 源码信息](#2-%E6%BA%90%E7%A0%81%E4%BF%A1%E6%81%AF)
+- [3. 源码分析](#3-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90)
+  - [3.1 存储客户](#31-%E5%AD%98%E5%82%A8%E5%AE%A2%E6%88%B7)
+    - [3.1.1 数据结构](#311-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
+    - [3.1.2 函数](#312-%E5%87%BD%E6%95%B0)
+    - [3.1.3 方法](#313-%E6%96%B9%E6%B3%95)
+      - [ProposeDeal()：下单](#proposedeal%E4%B8%8B%E5%8D%95)
+      - [QueryDeal()：查询订单状态](#querydeal%E6%9F%A5%E8%AF%A2%E8%AE%A2%E5%8D%95%E7%8A%B6%E6%80%81)
+  - [3.2 存储矿工](#32-%E5%AD%98%E5%82%A8%E7%9F%BF%E5%B7%A5)
+    - [3.2.1 数据结构](#321-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
+    - [3.2.2 函数](#322-%E5%87%BD%E6%95%B0)
+    - [3.2.3 方法](#323-%E6%96%B9%E6%B3%95)
+      - [handleMakeDeal()](#handlemakedeal)
+      - [handleQueryDeal()](#handlequerydeal)
+      - [OnCommitmentSent()](#oncommitmentsent)
+      - [OnNewHeaviestTipSet()](#onnewheaviesttipset)
+    - [3.2.4 dealsAwaitingSeal](#324-dealsawaitingseal)
+      - [3.2.4.1 数据结构](#3241-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
+      - [3.2.4.2 函数](#3242-%E5%87%BD%E6%95%B0)
+      - [3.2.4.3 方法](#3243-%E6%96%B9%E6%B3%95)
+        - [attachDealToSector()](#attachdealtosector)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 目录
 
-- 1. [协议概览图](#协议概览图)
+- 1. [协议概览图](#1. 协议概览图)
 
-- 2. [源码信息](#源码信息)
+- 2. [源码信息](#2. 源码信息)
 
 - 3. [源码分析](#源码分析)
 
-  - 3.1 [存储客户](#存储客户)
+  - 3.1 [存储客户](#3.1 存储客户)
     - 3.1.1 [数据结构](#3.1.1 数据结构)
     - 3.1.2 [函数](#3.1.2 函数)
     - 3.1.3 [client方法](#3.1.3 方法)
@@ -79,7 +109,7 @@ func MakeProtocolRequest(ctx context.Context, protocol protocol.ID, peer peer.ID
 
 #### 3.1.3 方法
 
-##### ProposeDeal（）：下单
+##### ProposeDeal()：下单
 
 - miner：存储矿工地址
 - data：待存储文件cid
@@ -304,7 +334,7 @@ func (smc *Client) recordResponse(ctx context.Context, resp *storagedeal.SignedR
 }
 ```
 
-##### QueryDeal（）：查询订单状态
+##### QueryDeal()：查询订单状态
 
 ```go
 func (smc *Client) QueryDeal(ctx context.Context, proposalCid cid.Cid) (*storagedeal.SignedResponse, error) {
@@ -1095,7 +1125,7 @@ func (sm *Miner) getActorSectorCommitments(ctx context.Context) (map[string]type
 
 #### 3.2.4 dealsAwaitingSeal
 
-##### 数据结构
+##### 3.2.4.1 数据结构
 
 ```go
 type dealsAwaitingSeal struct {
@@ -1127,7 +1157,7 @@ type sectorInfo struct {
 }
 ```
 
-##### 函数
+##### 3.2.4.2 函数
 
 - newDealsAwaitingSeal()
 
@@ -1140,7 +1170,7 @@ func newDealsAwaitingSeal() *dealsAwaitingSeal {
 }
 ```
 
-##### 方法
+##### 3.2.4.3 方法
 
 ###### attachDealToSector()
 
