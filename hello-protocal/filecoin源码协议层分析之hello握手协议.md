@@ -1,14 +1,21 @@
-## 目录
-- filecoin源码协议层分析之hello握手协议
-    -   1. [目的](#目的)
-    -   2. [源码信息](#源码信息)
-    - 3. [源码分析](源码分析)
-    
-      - 3.1 [数据结构](#数据结构)
-      - 3.2 [方法](#方法)
-      
-    -   4. [实例化及业务逻辑](#实例化及业务逻辑)
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
+- [目录](#%E7%9B%AE%E5%BD%95)
+- [1.目的](#1%E7%9B%AE%E7%9A%84)
+- [2.源码信息](#2%E6%BA%90%E7%A0%81%E4%BF%A1%E6%81%AF)
+- [3.源码分析](#3%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90)
+  - [3.1数据结构](#31%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
+  - [3.2 方法](#32-%E6%96%B9%E6%B3%95)
+    - [3.2.1 Handler方法](#321-handler%E6%96%B9%E6%B3%95)
+    - [3.2.2 helloNotify方法](#322-hellonotify%E6%96%B9%E6%B3%95)
+    - [3.3 函数](#33-%E5%87%BD%E6%95%B0)
+- [4.实例化及业务逻辑](#4%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%8F%8A%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## 目录
 ## 1.目的
 
 - Hello协议负责节点上线后的区块同步
@@ -69,7 +76,7 @@ type TipSetKey struct {
   - host对应libp2p上的主机
   - 创世区块cid
   - 区块同步回调函数
-  - 检索当前最重的tipset
+  - 获取tipset函数
   - 网络名称
 
 ```go
@@ -136,7 +143,9 @@ func (h *Handler) getOurHelloMessage() (*Message, error) {
 
 ```go
 func (h *Handler) ReceiveHello(ctx context.Context, p peer.ID) (*Message, error) {
-	s, err := h.host.NewStream(ctx, p, helloProtocol(h.networkName))
+    
+    //重点：newstream会创建到指定节点的流，此时会触发对端节点的handleNewStream流处理函数，会接收到对端节点的一条hello消息。
+    s, err := h.host.NewStream(ctx, p, helloProtocol(h.networkName))
 	if err != nil {
 		return nil, err
 	}
@@ -160,6 +169,13 @@ func (h *Handler) processHelloMessage(from peer.ID, msg *Message) (*types.ChainI
 	}
 
 	return types.NewChainInfo(from, msg.HeaviestTipSetCids, msg.HeaviestTipSetHeight), nil
+}
+
+// ChainInfo is used to track metadata about a peer and its chain.
+type ChainInfo struct {
+	Peer   peer.ID
+	Head   TipSetKey
+	Height uint64
 }
 ```
 
@@ -269,7 +285,7 @@ func New(h host.Host, gen cid.Cid, helloCallback helloCallback, getHeaviestTipSe
 - location: commands/daemon.go
 - 函数daemonRun( )
 
-![](./pic/node-daemon1.png)
+![](./img/node-daemon1.png)
 
 - location: node/node.go
 - Node中定义了HelloProtocol
