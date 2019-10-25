@@ -91,7 +91,7 @@ lotus daemon
 api 		端口号，默认1234
 ```
 
-回到[目录](#m目录)
+回到[目录](#目录)
 
 ### 1.2 Auth
 
@@ -101,7 +101,7 @@ api 		端口号，默认1234
 lotus auth create-admin-token     //此命令创建的token具有所有权限
 ```
 
-回到[目录](#m目录)
+回到[目录](#目录)
 
 ### 1.3 chain
 
@@ -179,7 +179,7 @@ count		指定获取的block数量;默认值30
 format		以什么格式打印;默认("<height>: (<time>) <blocks>")
 ```
 
-回到[目录](#m目录)
+回到[目录](#目录)
 
 
 
