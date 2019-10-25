@@ -236,8 +236,6 @@ cid		filecid
 
 #### 1.4.5 在网络上检索文件
 
-未验证
-
 ```
 lotus client retrieve <cid> <outfile> 
 ```
@@ -274,13 +272,11 @@ return：Ask:<mineraddr> ;Price per Byte:<Ask.Price>; Price per Block:<Ask.Price
 	Total Price:<Ask.Price*size*duration>
 ```
 
-回到[目录](#m目录)
+回到[目录](#目录)
 
 
 
 ### 1.5 创建存储矿工
-
-未验证
 
 ```sh
 lotus createminer <workeraddr> <owneraddr> <sector size> <peer ID>
@@ -296,7 +292,7 @@ sector size		指定扇区大小
 peerid			对等节点id
 ```
 
-回到[目录](#m目录)
+回到[目录](#目录)
 
 
 
@@ -316,7 +312,7 @@ lotus fetch-params
 lotus mpool pending
 ```
 
-回到[目录](#m目录)
+回到[目录](#目录)
 
 
 
@@ -346,13 +342,11 @@ lotus net listen
 lotus net id
 ```
 
-回到[目录](#m目录)
+回到[目录](#目录)
 
 
 
 ### 1.9 paych
-
-未验证
 
 #### 1.9.1 创建支付渠道或获取以存在的支付渠道
 
@@ -461,7 +455,7 @@ channel		支付渠道address
 voucher		凭证cid
 ```
 
-回到[目录](#m目录)
+回到[目录](#目录)
 
 
 
@@ -481,15 +475,13 @@ amount		转账金额
 source		转账账户地址，默认钱包地址
 ```
 
-回到[目录](#m目录)
+回到[目录](#目录)
 
 
 
 ### 2.1 state
 
 #### 2.1.1 查询算力
-
-已验证
 
 ```
 lotus state power
@@ -546,7 +538,7 @@ lotus state list-actors
 lotus state list-miners
 ```
 
-回到[目录](#m目录)
+回到[目录](#目录)
 
 
 
@@ -564,7 +556,7 @@ lotus sync status
 lotus sync wait
 ```
 
-回到[目录](#m目录)
+回到[目录](#目录)
 
 
 
@@ -641,7 +633,7 @@ lotus wallet set-default <address>
 address		wallet address
 ```
 
-回到[目录](#m目录)
+回到[目录](#目录)
 
 
 
@@ -662,7 +654,7 @@ owner		owner address
 worker		worker address
 ```
 
-回到[目录](#m目录)
+回到[目录](#目录)
 
 
 
@@ -688,23 +680,23 @@ lotus-storage-miner info
 lotus-storage-miner store-garbage
 ```
 
-回到[目录](#m目录)
+回到[目录](#目录)
 
 ### 2.5 Auth 
 
-[同上](#1.2 Auth)
+[同上](#12-auth)
 
 ### 2.6 chain
 
-[同上](#1.3 chain)
+[同上](#13-chain)
 
 ### 2.7 client
 
-[同上](#1.4 client)
+[同上](#14-client)
 
 ### 2.8 创建存储矿工
 
-[同上](#1.5 创建存储矿工)
+[同上](#15-%E5%88%9B%E5%BB%BA%E5%AD%98%E5%82%A8%E7%9F%BF%E5%B7%A5)
 
 ### 2.9 获取证明参数（同上）
 
@@ -724,3 +716,4 @@ lotus-storage-miner store-garbage
 
 ### 3.7 wallet（同上）
 
+回到[目录](#目录)
