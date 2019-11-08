@@ -1,6 +1,7 @@
 package repo
 
 import (
+	"go-filecoin-storage-helper/utils"
 	"os"
 	"path/filepath"
 
@@ -9,8 +10,10 @@ import (
 	"github.com/mitchellh/go-homedir"
 )
 
+const CtxRepoPath = "repopath"
+
 type FsRepo struct {
-	path string
+	Path string
 }
 
 func NewFS(path string) (*FsRepo, error) {
@@ -20,12 +23,12 @@ func NewFS(path string) (*FsRepo, error) {
 	}
 
 	return &FsRepo{
-		path: path,
+		Path: path,
 	}, nil
 }
 
 func (fsr *FsRepo) Exists() (bool, error) {
-	_, err := os.Stat(fsr.path)
+	_, err := os.Stat(fsr.Path)
 	notexist := os.IsNotExist(err)
 	if notexist {
 		err = nil
@@ -41,7 +44,23 @@ func (fsr *FsRepo) Init() error {
 	if exist {
 		return nil
 	}
-	err = os.Mkdir(fsr.path, 0755)
+	err = os.Mkdir(fsr.Path, 0755)
+	if err != nil && !os.IsExist(err) {
+		return err
+	}
+	return nil
+}
+
+func (fsr *FsRepo) GenerateMetaDir() error {
+	err := os.Mkdir(utils.NewPath([]string{fsr.Path, "meta"}), 0755)
+	if err != nil && !os.IsExist(err) {
+		return err
+	}
+	return nil
+}
+
+func (fsr *FsRepo) GenerateDbDir() error {
+	err := os.Mkdir(utils.NewPath([]string{fsr.Path, "dbfile"}), 0755)
 	if err != nil && !os.IsExist(err) {
 		return err
 	}
@@ -51,7 +70,7 @@ func (fsr *FsRepo) Init() error {
 func (fsr *FsRepo) Datastore(ns string) (datastore.Batching, error) {
 	opts := badger.DefaultOptions
 	opts.Truncate = true
-	ds, err := badger.NewDatastore(filepath.Join(fsr.path, ns), &opts)
+	ds, err := badger.NewDatastore(filepath.Join(fsr.Path, ns), &opts)
 	if err != nil {
 		return nil, err
 	}

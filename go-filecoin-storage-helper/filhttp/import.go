@@ -88,3 +88,23 @@ func QueryStorageDeal(ctx context.Context, dealID string) (StorageDealInfo, erro
 
 	return out, nil
 }
+
+//通过cid获取原数据库文件
+func Cat(ctx context.Context, cid string) (io.Reader, error) {
+	resp, err := Newhttp("").Request("client/cat", cid).
+		Send(ctx)
+	if err != nil {
+		return nil, err
+	}
+	if resp.Error != nil {
+		return nil, err
+	}
+	defer resp.Close()
+
+	b := new(bytes.Buffer)
+	if _, err := io.Copy(b, resp.Output); err != nil {
+		return nil, err
+	}
+
+	return b, nil
+}

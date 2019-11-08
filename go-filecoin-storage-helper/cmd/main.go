@@ -9,11 +9,14 @@ import (
 
 const FlagStorageHelperRepo = "storagehelperrepo"
 
+var CtxRepoPath string
+
 func main() {
 	local := []*cli.Command{
 		initcmd,
 		storagecmd,
 		dealstatuscmd,
+		retrivecmd,
 	}
 	app := &cli.App{
 		Name:    "filecoin-storage-helper",
@@ -23,7 +26,7 @@ func main() {
 			&cli.StringFlag{
 				Name: FlagStorageHelperRepo,
 				// EnvVars:	[]string
-				Value: "~/.filstoragehelper/meta",
+				Value: "/home/john/.filstoragehelper",
 			},
 		},
 		Commands: local,

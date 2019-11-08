@@ -13,7 +13,7 @@ type Httputils struct {
 
 func Newhttp(url string) *Httputils {
 	if url == "" {
-		url = "127.0.0.1:3453"
+		url = "192.168.1.189:3453"
 	}
 	return &Httputils{
 		url: url,
