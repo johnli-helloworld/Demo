@@ -27,7 +27,7 @@ type requestBuilder struct {
 	headers map[string]string
 	body    io.Reader
 
-	shell *Httputils
+	shell *HttpAPI
 }
 
 func (r *requestBuilder) Arguments(args ...string) RequestBuilder {

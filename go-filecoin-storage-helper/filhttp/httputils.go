@@ -5,22 +5,22 @@ import (
 	gohttp "net/http"
 )
 
-type Httputils struct {
+type HttpAPI struct {
 	url     string
 	httpcli gohttp.Client
 	Headers http.Header
 }
 
-func Newhttp(url string) *Httputils {
+func Newhttp(url string) *HttpAPI {
 	if url == "" {
-		url = "192.168.1.189:3453"
+		url = "127.0.0.1:3453"
 	}
-	return &Httputils{
+	return &HttpAPI{
 		url: url,
 	}
 }
 
-func (api *Httputils) Request(command string, args ...string) RequestBuilder {
+func (api *HttpAPI) Request(command string, args ...string) RequestBuilder {
 	headers := make(map[string]string)
 	if api.Headers != nil {
 		for k := range api.Headers {
@@ -33,4 +33,8 @@ func (api *Httputils) Request(command string, args ...string) RequestBuilder {
 		shell:   api,
 		headers: headers,
 	}
+}
+
+func (api *HttpAPI) Storage() Storage {
+	return (*StorageAPI)(api)
 }

@@ -14,7 +14,7 @@ var CtxRepoPath string
 func main() {
 	local := []*cli.Command{
 		initcmd,
-		storagecmd,
+		importcmd,
 		dealstatuscmd,
 		retrivecmd,
 	}
@@ -26,7 +26,7 @@ func main() {
 			&cli.StringFlag{
 				Name: FlagStorageHelperRepo,
 				// EnvVars:	[]string
-				Value: "/home/john/.filstoragehelper",
+				Value: "/home/ars/johntest/.filstoragehelper",
 			},
 		},
 		Commands: local,

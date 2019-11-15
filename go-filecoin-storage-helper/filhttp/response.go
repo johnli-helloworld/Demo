@@ -82,12 +82,11 @@ func (r *Request) Send(c *http.Client) (*Response, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	contentType, _, err := mime.ParseMediaType(resp.Header.Get("Content-Type"))
 	if err != nil {
 		return nil, err
 	}
-
+	
 	nresp := new(Response)
 	nresp.Output = &trailerReader{resp}
 	if resp.StatusCode >= http.StatusBadRequest {

@@ -3,9 +3,10 @@ package main
 import (
 	"context"
 	"errors"
-	"go-filecoin-storage-helper/meta"
+	"fmt"
 	"go-filecoin-storage-helper/repo"
 
+	badger "github.com/ipfs/go-ds-badger"
 	"gopkg.in/urfave/cli.v2"
 )
 
@@ -39,13 +40,15 @@ var dealstatuscmd = &cli.Command{
 			return errors.New("repo at is not initialized, run 'filecoin-storage-helper init' to set it up")
 		}
 		ctx = context.WithValue(ctx, repo.CtxRepoPath, repopath)
-		//生成元数据库
-		m, err := meta.ReductionDS(ctx, cid)
+		opts := badger.DefaultOptions
+		opts.Truncate = true
+		m, err := badger.NewDatastore("", &opts)
+		state, err := m.QueryDealStatus(ctx)
 		if err != nil {
 			return err
 		}
+		fmt.Printf("state:%+v\n", state)
 
-		//
 		return nil
 	},
 }

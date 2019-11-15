@@ -24,14 +24,14 @@ var initcmd = &cli.Command{
 			return err
 		}
 		//生成meta目录，存放badger的数据
-		if err := r.GenerateMetaDir(); err != nil {
-			log.Println("Initializing meta dir err")
-			return err
-		}
-		if err := r.GenerateDbDir(); err != nil {
-			log.Println("Initializing db dir err")
-			return err
-		}
+		// if err := r.GenerateMetaDir(); err != nil {
+		// 	log.Println("Initializing meta dir err")
+		// 	return err
+		// }
+		// if err := r.GenerateDbDir(); err != nil {
+		// 	log.Println("Initializing db dir err")
+		// 	return err
+		// }
 		return nil
 	},
 }
