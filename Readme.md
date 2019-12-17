@@ -2,7 +2,7 @@
 
 ### Storage workflow
 
-We think the keypoint is that client must pay for the metadata, the metadata is used for data retrieval,We'll store the metadata by leveldb, Each upload action will use a separate db.
+ We think the keypoint is that client must pay for the metadata, the metadata is used for data retrieval,We'll store the metadata by leveldb, Each upload action will use a separate db.
 
 
 
